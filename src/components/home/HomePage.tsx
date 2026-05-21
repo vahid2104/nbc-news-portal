@@ -1,6 +1,6 @@
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/Footer";
-import HeroSection from "./hero/HeroSection";
+import HeroSection from "@/components/home/hero";
 import BreakingNews from "./BreakingNews";
 import LatestStories from "./LatestStories";
 import RightSidebar from "./RightSidebar";
