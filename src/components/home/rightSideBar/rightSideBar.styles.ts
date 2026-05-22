@@ -1,5 +1,5 @@
 export const rightSidebarStyles = {
-  aside: "w-full space-y-8",
+  aside: "w-1/3 space-y-8",
 
   section: "w-full",
 

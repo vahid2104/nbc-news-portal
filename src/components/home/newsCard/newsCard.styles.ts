@@ -1,5 +1,5 @@
 export const newsCardStyles = {
-  articleBase: "bg-white shadow-sm transition hover:shadow-md",
+  articleBase: "flex flex-col justify-between bg-white shadow-sm transition hover:shadow-md",
 
   articleGrid: "overflow-hidden",
 
@@ -27,7 +27,7 @@ export const newsCardStyles = {
     "mb-5 flex flex-wrap items-center gap-3 text-xs text-gray-500",
 
   actions:
-    "mt-auto flex items-center gap-5 text-xs text-gray-500",
+    "mt-auto flex items-center justify-center border-t border-gray-200 pt-4 gap-5 text-xs text-gray-500",
 
   actionButton:
     "flex items-center gap-1 transition hover:text-red-600",
