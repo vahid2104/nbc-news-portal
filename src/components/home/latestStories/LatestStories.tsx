@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { Grid2X2, List } from "lucide-react";
 
-import { latestStories, NewsItem } from "@/lib/mockData";
+import { latestStories } from "@/lib/mockData";
+import type { NewsItem } from "@/lib/mockData";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
-import NewsCard from "../NewsCard";
+import NewsCard from "../newsCard";
 import { latestStoriesStyles as styles } from "./latestStories.styles";
 
 

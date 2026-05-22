@@ -1,5 +1,5 @@
 export const latestStoriesStyles = {
-  section: "w-full",
+  section: "w-2/3",
 
   header:
     "mb-5 flex items-center justify-between border-b border-gray-200",

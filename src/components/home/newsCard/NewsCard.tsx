@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { BookmarkIcon, Heart, Share2 } from "lucide-react";
-
 import type { NewsItem } from "@/lib/mockData";
+import { newsCardStyles as styles } from "./newsCard.styles";
 
 type ViewMode = "grid" | "list";
 
@@ -15,56 +15,54 @@ export default function NewsCard({ news, viewMode }: NewsCardProps) {
 
   return (
     <article
-      className={`bg-white shadow-sm ${
-        isList ? "flex gap-4 p-4" : "overflow-hidden"
-      }`}
+      className={styles.articleBase}
     >
       <div
         className={
           isList
-            ? "relative h-32 w-48 shrink-0"
-            : "relative h-48 w-full"
+            ? styles.imageWrapperList
+            : styles.imageWrapperGrid
         }
       >
         <Image
           src={news.image}
           alt={news.title}
           fill
-          className="object-cover"
+          className={styles.image}
         />
 
-        <span className="absolute bottom-3 right-3 bg-red-600 px-2 py-1 text-[10px] font-bold uppercase text-white">
+        <span className={styles.categoryBadge}>
           {news.category}
         </span>
       </div>
 
-      <div className={isList ? "flex flex-1 flex-col" : "p-5"}>
-        <h3 className="mb-2 text-base font-bold leading-snug text-gray-900">
+      <div className={isList ? styles.contentList : styles.contentGrid}>
+        <h3 className={styles.title}>
           {news.title}
         </h3>
 
-        <p className="mb-4 text-sm leading-6 text-gray-600">
+        <p className={styles.description}>
           {news.description}
         </p>
 
-        <div className="mb-5 flex items-center gap-3 text-xs text-gray-500">
+        <div className={styles.meta}>
           <span>{news.timeAgo}</span>
           <span>By {news.author}</span>
           <span>{news.readTime}</span>
         </div>
 
-        <div className="mt-auto flex items-center justify-center gap-5 text-xs text-gray-500 border-t border-gray-200 pt-4">
-          <button className="flex items-center gap-1 hover:text-red-600">
+        <div className={styles.actions}>
+          <button className={styles.actionButton}>
             <Heart size={18} />
             {news.likes}
           </button>
 
-          <button className="flex items-center gap-1 hover:text-red-600">
+          <button className={styles.actionButton}>
             <Share2 size={18} />
             {news.shares}
           </button>
 
-          <button className="flex items-center gap-1 hover:text-red-600">
+          <button className={styles.actionButton}>
             <BookmarkIcon size={18} />
           </button>
         </div>
