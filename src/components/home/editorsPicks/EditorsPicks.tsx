@@ -2,10 +2,10 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { Heart, Share2, Star } from "lucide-react";
+import { Star } from "lucide-react";
 
 import { editorsPicks } from "@/lib/mockData";
-import BookmarkButton from "@/components/ui/BookmarkButton";
+import ActionIcons from "@/components/ui/ActionIcons";
 import { editorsPicksStyles as styles } from "./editorsPicks.styles";
 
 export default function EditorsPicks() {
@@ -44,27 +44,23 @@ export default function EditorsPicks() {
                 alt={item.title}
                 fill
                 className={styles.image}
+                sizes="260px"
               />
 
-              <span className={styles.categoryBadge}>{item.category}</span>
+              <span className={styles.categoryBadge}>
+                {item.category}
+              </span>
             </div>
 
             <div className={styles.content}>
               <h3 className={styles.cardTitle}>{item.title}</h3>
 
-              <div className={styles.actions}>
-                <button className={styles.actionButton}>
-                  <Heart size={14} />
-                  {item.likes}
-                </button>
-
-                <button className={styles.actionButton}>
-                  <Share2 size={14} />
-                  {item.shares}
-                </button>
-
-                <BookmarkButton newsId={item.id} />
-              </div>
+              <ActionIcons
+                newsId={item.id}
+                likes={item.likes}
+                shares={item.shares}
+                className={styles.actions}
+              />
             </div>
           </article>
         ))}
@@ -75,9 +71,12 @@ export default function EditorsPicks() {
           {Array.from({ length: dotsCount }).map((_, index) => (
             <button
               key={index}
+              type="button"
               onClick={() => handleDotClick(index)}
               className={`${styles.dotBase} ${
-                activeDot === index ? styles.dotActive : styles.dotInactive
+                activeDot === index
+                  ? styles.dotActive
+                  : styles.dotInactive
               }`}
               aria-label={`Go to editor picks page ${index + 1}`}
             />

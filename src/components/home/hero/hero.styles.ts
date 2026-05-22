@@ -1,7 +1,7 @@
 export const heroStyles = {
-    mainContainer: "flex items-center justify-between gap-10",
-    image: "rounded-lg object-cover w-1/2",
-    content: "flex flex-col w-1/2 ml-8",
+    mainContainer: "flex md:flex-row flex-col items-center justify-between gap-10",
+    image: "rounded-lg object-cover md:w-1/2 w-full h-80",
+    content: "flex flex-col md:w-1/2 w-full md:ml-8",
     trending: "text-xl text-red-700 font-semibold",
     iconContainer: "flex ml-auto",
     iconButton: "text-sm text-gray-500 ml-4",

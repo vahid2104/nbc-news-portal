@@ -1,5 +1,5 @@
 export const latestStoriesStyles = {
-  section: "w-2/3",
+  section: "md:w-2/3 w-full",
 
   header:
     "mb-5 flex items-center justify-between border-b border-gray-200",
@@ -9,34 +9,26 @@ export const latestStoriesStyles = {
   tabButtonBase:
     "border-b-2 pb-3 text-sm font-semibold transition",
 
-  tabButtonActive:
-    "border-red-600 text-black",
+  tabButtonActive: "border-red-600 text-black",
 
   tabButtonInactive:
     "border-transparent text-gray-500 hover:text-black",
 
   toggleWrapper: "flex items-center gap-2 pb-3",
 
-  toggleButtonBase:
-    "rounded p-1.5 transition",
+  toggleButtonBase: "rounded p-1.5 transition",
 
-  toggleButtonActive:
-    "bg-gray-900 text-white",
+  toggleButtonActive: "bg-gray-900 text-white",
 
-  toggleButtonInactive:
-    "text-gray-500 hover:bg-gray-100",
+  toggleButtonInactive: "text-gray-500 hover:bg-gray-100",
 
-  gridWrapper:
-    "grid grid-cols-1 gap-6 md:grid-cols-2",
+  gridWrapper: "grid grid-cols-1 gap-6 md:grid-cols-2",
 
-  listWrapper:
-    "flex flex-col gap-5",
+  listWrapper: "flex flex-col gap-5",
 
-  emptyText:
-    "py-8 text-sm text-gray-500",
+  emptyText: "py-8 text-sm text-gray-500",
 
-  viewMoreWrapper:
-    "mt-8 flex justify-center",
+  viewMoreWrapper: "mt-8 flex justify-center",
 
   viewMoreButton:
     "border border-red-200 px-10 py-3 text-xs font-semibold uppercase tracking-[0.25em] text-red-600 transition hover:bg-red-600 hover:text-white",

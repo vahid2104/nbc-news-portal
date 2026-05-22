@@ -11,7 +11,7 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col bg-gray-100">
       <Navbar />
 
-      <main className="container mx-auto px-4 py-8">
+      <main className="container max-w-7xl mx-auto px-4 py-8">
         <HeroSection />
         <BreakingNews />
 

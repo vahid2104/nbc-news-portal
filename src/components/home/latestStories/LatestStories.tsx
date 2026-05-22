@@ -9,7 +9,6 @@ import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import NewsCard from "../newsCard";
 import { latestStoriesStyles as styles } from "./latestStories.styles";
 
-
 type TabType = "Latest Stories" | "Think" | "Health";
 type ViewMode = "grid" | "list";
 
@@ -27,7 +26,7 @@ export default function LatestStories() {
   const { visibleItems, hasMore, loadMore } = useInfiniteScroll<NewsItem>(
     filteredStories,
     4,
-    4,
+    4
   );
 
   return (
@@ -37,6 +36,7 @@ export default function LatestStories() {
           {tabs.map((tab) => (
             <button
               key={tab}
+              type="button"
               onClick={() => setActiveTab(tab)}
               className={`${styles.tabButtonBase} ${
                 activeTab === tab
@@ -51,6 +51,7 @@ export default function LatestStories() {
 
         <div className={styles.toggleWrapper}>
           <button
+            type="button"
             onClick={() => setViewMode("grid")}
             className={`${styles.toggleButtonBase} ${
               viewMode === "grid"
@@ -63,6 +64,7 @@ export default function LatestStories() {
           </button>
 
           <button
+            type="button"
             onClick={() => setViewMode("list")}
             className={`${styles.toggleButtonBase} ${
               viewMode === "list"
@@ -79,12 +81,10 @@ export default function LatestStories() {
       {visibleItems.length > 0 ? (
         <div
           className={
-            viewMode === "grid"
-              ? styles.gridWrapper
-              : styles.listWrapper
+            viewMode === "grid" ? styles.gridWrapper : styles.listWrapper
           }
         >
-          {visibleItems.map((item: NewsItem) => (
+          {visibleItems.map((item) => (
             <NewsCard key={item.id} news={item} viewMode={viewMode} />
           ))}
         </div>
@@ -97,6 +97,7 @@ export default function LatestStories() {
       {hasMore && (
         <div className={styles.viewMoreWrapper}>
           <button
+            type="button"
             onClick={loadMore}
             className={styles.viewMoreButton}
           >

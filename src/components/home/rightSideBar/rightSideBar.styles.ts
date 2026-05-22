@@ -1,5 +1,5 @@
 export const rightSidebarStyles = {
-  aside: "w-1/3 space-y-8",
+  aside: "md:w-1/3 w-full space-y-8",
 
   section: "w-full",
 
@@ -9,13 +9,15 @@ export const rightSidebarStyles = {
 
   sectionTitle: "text-lg font-bold text-gray-900",
 
-  liveCard: "overflow-hidden bg-white shadow-sm transition hover:shadow-md",
+  liveCard:
+    "overflow-hidden bg-white shadow-sm transition hover:shadow-md",
 
   liveImageWrapper: "relative h-48 w-full",
 
   image: "object-cover",
 
-  imageOverlay: "absolute inset-0 flex items-center justify-center bg-black/20",
+  imageOverlay:
+    "absolute inset-0 flex items-center justify-center bg-black/20",
 
   playButton:
     "flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-red-600 transition hover:scale-105 hover:bg-white",

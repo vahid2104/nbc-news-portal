@@ -1,34 +1,38 @@
 export const newsCardStyles = {
-  articleBase: "bg-white shadow-sm transition hover:shadow-md",
+  articleBase:
+    "bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md",
 
   articleGrid: "overflow-hidden",
 
-  articleList: "flex gap-4 p-4",
+  articleList:
+    "flex flex-col gap-4 overflow-hidden p-4 sm:flex-row",
 
   imageWrapperGrid: "relative h-48 w-full",
 
-  imageWrapperList: "relative h-32 w-48 shrink-0",
+  imageWrapperList:
+    "relative h-48 w-full shrink-0 sm:h-32 sm:w-48",
 
   image: "object-cover",
 
   categoryBadge:
     "absolute bottom-3 right-3 bg-red-600 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-white",
 
-  contentGrid: "p-5",
+  contentGrid: "flex min-h-[220px] flex-col p-5",
 
   contentList: "flex flex-1 flex-col",
 
   title:
     "mb-2 text-base font-bold leading-snug text-gray-900 transition hover:text-red-600",
 
-  description: "mb-4 text-sm leading-6 text-gray-600",
+  description:
+    "mb-4 line-clamp-3 text-sm leading-6 text-gray-600",
 
   meta:
     "mb-5 flex flex-wrap items-center gap-3 text-xs text-gray-500",
 
   actions:
-    "mt-auto flex items-center justify-center border-t border-gray-200 pt-4 gap-5 text-xs text-gray-500",
+    "mt-auto border-t border-gray-100 pt-4",
 
-  actionButton:
-    "flex items-center gap-1 transition hover:text-red-600",
+  actionIcons:
+    "justify-start",
 };

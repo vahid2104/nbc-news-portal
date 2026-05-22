@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { BookmarkIcon, Heart, Share2 } from "lucide-react";
+
 import type { NewsItem } from "@/lib/mockData";
+import ActionIcons from "@/components/ui/ActionIcons";
 import { newsCardStyles as styles } from "./newsCard.styles";
 
 type ViewMode = "grid" | "list";
@@ -15,13 +16,13 @@ export default function NewsCard({ news, viewMode }: NewsCardProps) {
 
   return (
     <article
-      className={styles.articleBase}
+      className={`${styles.articleBase} ${
+        isList ? styles.articleList : styles.articleGrid
+      }`}
     >
       <div
         className={
-          isList
-            ? styles.imageWrapperList
-            : styles.imageWrapperGrid
+          isList ? styles.imageWrapperList : styles.imageWrapperGrid
         }
       >
         <Image
@@ -29,21 +30,20 @@ export default function NewsCard({ news, viewMode }: NewsCardProps) {
           alt={news.title}
           fill
           className={styles.image}
+          sizes={
+            isList
+              ? "(max-width: 768px) 100vw, 220px"
+              : "(max-width: 768px) 100vw, 50vw"
+          }
         />
 
-        <span className={styles.categoryBadge}>
-          {news.category}
-        </span>
+        <span className={styles.categoryBadge}>{news.category}</span>
       </div>
 
       <div className={isList ? styles.contentList : styles.contentGrid}>
-        <h3 className={styles.title}>
-          {news.title}
-        </h3>
+        <h3 className={styles.title}>{news.title}</h3>
 
-        <p className={styles.description}>
-          {news.description}
-        </p>
+        <p className={styles.description}>{news.description}</p>
 
         <div className={styles.meta}>
           <span>{news.timeAgo}</span>
@@ -52,19 +52,12 @@ export default function NewsCard({ news, viewMode }: NewsCardProps) {
         </div>
 
         <div className={styles.actions}>
-          <button className={styles.actionButton}>
-            <Heart size={18} />
-            {news.likes}
-          </button>
-
-          <button className={styles.actionButton}>
-            <Share2 size={18} />
-            {news.shares}
-          </button>
-
-          <button className={styles.actionButton}>
-            <BookmarkIcon size={18} />
-          </button>
+          <ActionIcons
+            newsId={news.id}
+            likes={news.likes}
+            shares={news.shares}
+            className={styles.actionIcons}
+          />
         </div>
       </div>
     </article>

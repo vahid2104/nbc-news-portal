@@ -2,7 +2,11 @@
 
 import { useMemo, useState } from "react";
 
-export function useInfiniteScroll<T>(items: T[], initialCount = 4, step = 4) {
+export function useInfiniteScroll<T>(
+  items: T[],
+  initialCount = 4,
+  step = 4
+) {
   const [visibleCount, setVisibleCount] = useState(initialCount);
 
   const visibleItems = useMemo(() => {

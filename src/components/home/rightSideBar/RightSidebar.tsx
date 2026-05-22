@@ -3,8 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import { MapPin, PlayCircle } from "lucide-react";
-import { rightSidebarStyles as styles } from "./rightSideBar.styles";
+
 import { liveNews } from "@/lib/mockData";
+import { rightSidebarStyles as styles } from "./rightSideBar.styles";
 
 export default function RightSidebar() {
   const [location, setLocation] = useState("");
@@ -21,10 +22,9 @@ export default function RightSidebar() {
 
   return (
     <aside className={styles.aside}>
-      {/* Live Section */}
-      <section>
+      <section className={styles.section}>
         <div className={styles.sectionTitleWrapper}>
-          <span className={styles.liveDot}></span>
+          <span className={styles.liveDot} />
           <h2 className={styles.sectionTitle}>Live</h2>
         </div>
 
@@ -36,10 +36,12 @@ export default function RightSidebar() {
                 alt={liveNews.title}
                 fill
                 className={styles.image}
+                sizes="(max-width: 1024px) 100vw, 320px"
               />
 
               <div className={styles.imageOverlay}>
                 <button
+                  type="button"
                   className={styles.playButton}
                   aria-label="Play live news"
                 >
@@ -47,15 +49,11 @@ export default function RightSidebar() {
                 </button>
               </div>
 
-              <span className={styles.liveBadge}>
-                Live
-              </span>
+              <span className={styles.liveBadge}>Live</span>
             </div>
 
             <div className={styles.liveContent}>
-              <h3 className={styles.liveTitle}>
-                {liveNews.title}
-              </h3>
+              <h3 className={styles.liveTitle}>{liveNews.title}</h3>
 
               <p className={styles.liveDescription}>
                 {liveNews.description}
@@ -67,7 +65,6 @@ export default function RightSidebar() {
         )}
       </section>
 
-      {/* Location News Section */}
       <section className={styles.locationSection}>
         <div className={styles.sectionTitleWrapper}>
           <MapPin size={18} className={styles.locationIcon} />
@@ -87,10 +84,7 @@ export default function RightSidebar() {
             className={styles.input}
           />
 
-          <button
-            type="submit"
-            className={styles.submitButton}
-          >
+          <button type="submit" className={styles.submitButton}>
             Submit
           </button>
         </form>

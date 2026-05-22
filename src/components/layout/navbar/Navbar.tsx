@@ -1,34 +1,36 @@
-import { BarChartIcon, SearchIcon, UserIcon } from "lucide-react";
-import Image from "next/image"
+import Image from "next/image";
+import { Menu, Search, User } from "lucide-react";
+
+import { categories } from "@/lib/mockData";
 import { navbarStyles as styles } from "./navbar.styles";
 
-const navigation = [
-  "Corona Updates", "Politics", "Business", "Sports", "World", "Travel", "Podcasts"
-];
-
-const Navbar = () => {
+export default function Navbar() {
   return (
-    <div className={styles.mainBox}>
-        <nav className={styles.navContainer}>
-            <Image src="/logo/logo.png" alt="NBC News Logo" width={50} height={50} />
-            
-            <ul className={styles.navList}>
-                {navigation.map((item) => (
-                    <li key={item} className={styles.navItem}>
-                        {item}
-                    </li>
-                ))}
-            </ul>
+    <header className={styles.mainBox}>
+      <nav className={styles.navContainer}>
+        <Image
+          src="/logo/logo.png"
+          alt="NBC News Logo"
+          width={48}
+          height={48}
+          className={styles.logo}
+          priority
+        />
 
-            <div className={styles.iconContainer}>
-                <UserIcon className={styles.icon} />
-                <SearchIcon className={styles.icon} />
-                <BarChartIcon className={styles.barChartIcon} />
-            </div>
+        <ul className={styles.navList}>
+          {categories.map((item) => (
+            <li key={item} className={styles.navItem}>
+              {item}
+            </li>
+          ))}
+        </ul>
 
-        </nav>
-    </div>
-  )
+        <div className={styles.iconContainer}>
+          <User className={styles.icon} />
+          <Search className={styles.icon} />
+          <Menu className={styles.icon} />
+        </div>
+      </nav>
+    </header>
+  );
 }
-
-export default Navbar
