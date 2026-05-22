@@ -3,7 +3,7 @@ import Footer from "@/components/layout/Footer";
 import HeroSection from "@/components/home/hero";
 import BreakingNews from "./BreakingNews";
 import LatestStories from "@/components/home/latestStories";
-import RightSidebar from "./RightSidebar";
+import RightSidebar from "@/components/home/rightSideBar";
 import EditorsPicks from "./EditorsPicks";
 
 export default function HomePage() {
