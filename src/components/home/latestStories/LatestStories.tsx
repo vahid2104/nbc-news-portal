@@ -5,7 +5,9 @@ import { Grid2X2, List } from "lucide-react";
 
 import { latestStories, NewsItem } from "@/lib/mockData";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
-import NewsCard from "./NewsCard";
+import NewsCard from "../NewsCard";
+import { latestStoriesStyles as styles } from "./latestStories.styles";
+
 
 type TabType = "Latest Stories" | "Think" | "Health";
 type ViewMode = "grid" | "list";
@@ -28,17 +30,17 @@ export default function LatestStories() {
   );
 
   return (
-    <section className="w-2/3">
-      <div className="mb-5 flex items-center justify-between border-b border-gray-200">
-        <div className="flex items-center gap-6">
+    <section className={styles.section}>
+      <div className={styles.header}>
+        <div className={styles.tabsWrapper}>
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`pb-3 text-sm font-semibold transition ${
+              className={`${styles.tabButtonBase} ${
                 activeTab === tab
-                  ? "border-b-2 border-red-600 text-black"
-                  : "border-b-2 border-transparent text-gray-500 hover:text-black"
+                  ? styles.tabButtonActive
+                  : styles.tabButtonInactive
               }`}
             >
               {tab}
@@ -46,13 +48,13 @@ export default function LatestStories() {
           ))}
         </div>
 
-        <div className="flex items-center gap-2 pb-3">
+        <div className={styles.toggleWrapper}>
           <button
             onClick={() => setViewMode("grid")}
-            className={`rounded p-1.5 transition ${
+            className={`${styles.toggleButtonBase} ${
               viewMode === "grid"
-                ? "bg-gray-900 text-white"
-                : "text-gray-500 hover:bg-gray-100"
+                ? styles.toggleButtonActive
+                : styles.toggleButtonInactive
             }`}
             aria-label="Grid view"
           >
@@ -61,10 +63,10 @@ export default function LatestStories() {
 
           <button
             onClick={() => setViewMode("list")}
-            className={`rounded p-1.5 transition ${
+            className={`${styles.toggleButtonBase} ${
               viewMode === "list"
-                ? "bg-gray-900 text-white"
-                : "text-gray-500 hover:bg-gray-100"
+                ? styles.toggleButtonActive
+                : styles.toggleButtonInactive
             }`}
             aria-label="List view"
           >
@@ -77,8 +79,8 @@ export default function LatestStories() {
         <div
           className={
             viewMode === "grid"
-              ? "grid grid-cols-1 gap-6 md:grid-cols-2"
-              : "flex flex-col gap-5"
+              ? styles.gridWrapper
+              : styles.listWrapper
           }
         >
           {visibleItems.map((item: NewsItem) => (
@@ -86,16 +88,16 @@ export default function LatestStories() {
           ))}
         </div>
       ) : (
-        <p className="py-8 text-sm text-gray-500">
+        <p className={styles.emptyText}>
           No stories found for this category.
         </p>
       )}
 
       {hasMore && (
-        <div className="mt-8 flex justify-center">
+        <div className={styles.viewMoreWrapper}>
           <button
             onClick={loadMore}
-            className="border border-red-200 px-10 py-3 text-xs font-semibold uppercase tracking-[0.25em] text-red-600 transition hover:bg-red-600 hover:text-white"
+            className={styles.viewMoreButton}
           >
             View More
           </button>
