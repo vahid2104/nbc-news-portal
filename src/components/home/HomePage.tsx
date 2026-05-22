@@ -4,7 +4,7 @@ import HeroSection from "@/components/home/hero";
 import BreakingNews from "./BreakingNews";
 import LatestStories from "@/components/home/latestStories";
 import RightSidebar from "@/components/home/rightSideBar";
-import EditorsPicks from "./editorsPicks/EditorsPicks";
+import EditorsPicks from "@/components/home/editorsPicks";
 
 export default function HomePage() {
   return (
