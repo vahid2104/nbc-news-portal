@@ -15,7 +15,7 @@ export default function HomePage() {
         <HeroSection />
         <BreakingNews />
 
-        <section>
+        <section className="flex flex-col md:flex-row gap-8">
           <LatestStories />
           <RightSidebar />
         </section>
