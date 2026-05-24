@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Heart, Mail, MessageCircle, Share2 } from "lucide-react";
+import { Mail, MessageCircle, Share2 } from "lucide-react";
 
 import type { NewsItem } from "@/lib/mockData";
 import { newsData } from "@/lib/mockData";
 import ActionIcons from "@/components/ui/ActionIcons";
 import BookmarkButton from "@/components/ui/BookmarkButton";
+import LikeButton from "@/components/ui/LikeButton";
 import { newsDetailsStyles as styles } from "./newsDetails.styles";
 import { FaTwitter } from "react-icons/fa6";
 
@@ -13,11 +14,12 @@ type NewsDetailsProps = {
   news: NewsItem;
 };
 
-function getRandomNews(currentId: number, count: number) {
-  return newsData
-    .filter((item) => item.id !== currentId)
-    .sort((a, b) => a.id - b.id)
-    .slice(0, count);
+function getRecommendedNews(currentId: number, count: number) {
+  return newsData.filter((item) => item.id !== currentId).slice(0, count);
+}
+
+function getRelatedNews(currentId: number, count: number) {
+  return newsData.filter((item) => item.id !== currentId).slice(3, 3 + count);
 }
 
 export default function NewsDetails({ news }: NewsDetailsProps) {
@@ -25,21 +27,22 @@ export default function NewsDetails({ news }: NewsDetailsProps) {
     .split("\n")
     .filter((paragraph) => paragraph.trim().length > 0);
 
-  const recommendedNews = getRandomNews(news.id, 2);
-  const relatedNews = newsData
-    .filter((item) => item.id !== news.id)
-    .slice(3, 7);
+  const recommendedNews = getRecommendedNews(news.id, 2);
+  const relatedNews = getRelatedNews(news.id, 4);
 
+  const basedOnLikeNews = relatedNews[0];
   const inlineImage = recommendedNews[0]?.image || news.image;
 
   return (
     <main className={styles.page}>
+      {/* Hero title area */}
       <section className={styles.hero}>
         <div className={styles.heroContainer}>
           <h1 className={styles.title}>{news.title}</h1>
         </div>
       </section>
 
+      {/* Main centered image */}
       <div className={styles.imageOuter}>
         <div className={styles.imageWrapper}>
           <Image
@@ -53,11 +56,14 @@ export default function NewsDetails({ news }: NewsDetailsProps) {
         </div>
       </div>
 
+      {/* Main body */}
       <section className={styles.body}>
+        {/* Left sticky actions */}
         <aside className={styles.leftActions}>
           <div className={styles.leftActionsInner}>
             <div>
               <p className={styles.likeQuestion}>See more like this?</p>
+
               <div className={styles.colorDots}>
                 <span className={styles.greenDot} />
                 <span className={styles.orangeDot} />
@@ -65,24 +71,32 @@ export default function NewsDetails({ news }: NewsDetailsProps) {
             </div>
 
             <div className={styles.verticalActions}>
-              <button className={styles.verticalActionButton}>
-                <Heart size={24} className="fill-red-600 text-red-600" />
-                <span>{news.likes}</span>
-              </button>
+              <LikeButton
+                newsId={news.id}
+                likes={news.likes}
+                iconSize={24}
+                className={styles.verticalActionButton}
+              />
 
-              <button className={styles.verticalActionButton}>
+              <button type="button" className={styles.verticalActionButton}>
                 <MessageCircle size={24} />
                 <span>21</span>
               </button>
 
-              <button className={styles.verticalActionButton}>
+              <button type="button" className={styles.verticalActionButton}>
                 <Share2 size={22} />
               </button>
-              <BookmarkButton newsId={news.id} size={24} className={styles.verticalActionButton}/>
+
+              <BookmarkButton
+                newsId={news.id}
+                iconSize={24}
+                className={styles.verticalActionButton}
+              />
             </div>
           </div>
         </aside>
 
+        {/* Article content */}
         <article className={styles.article}>
           <div className={styles.meta}>
             <span>{news.timeAgo}</span>
@@ -105,6 +119,12 @@ export default function NewsDetails({ news }: NewsDetailsProps) {
               title, image, content, author, recommendations and comments will
               come dynamically from the backend.
             </p>
+
+            <p className={styles.paragraph}>
+              For now, this page demonstrates how a real article details page
+              can be structured with reusable components, localStorage actions,
+              recommended news and related topics.
+            </p>
           </div>
 
           <h2 className={styles.highlight}>
@@ -122,22 +142,26 @@ export default function NewsDetails({ news }: NewsDetailsProps) {
             />
           </div>
 
+          {/* Fake newsletter/comment-style block */}
           <section className={styles.newsletter}>
             <h2 className={styles.newsletterTitle}>
               Sign up for The NBC News Newsletter
             </h2>
+
             <p className={styles.newsletterAuthor}>By {news.author}</p>
+
             <p className={styles.newsletterText}>
               A weekly, ad-free newsletter that helps readers stay in the know,
               be productive, and think more critically about the world.
             </p>
 
-            <button className={styles.newsletterButton}>
+            <button type="button" className={styles.newsletterButton}>
               <Mail size={16} />
               Get this newsletter
             </button>
           </section>
 
+          {/* Tags */}
           <div className={styles.tags}>
             <span className={styles.tag}>NBCBLK</span>
             <span className={styles.tag}>Trending</span>
@@ -145,6 +169,7 @@ export default function NewsDetails({ news }: NewsDetailsProps) {
             <span className={styles.tag}>Freebie</span>
           </div>
 
+          {/* Bottom actions */}
           <div className={styles.bottomActions}>
             <ActionIcons
               newsId={news.id}
@@ -153,6 +178,7 @@ export default function NewsDetails({ news }: NewsDetailsProps) {
             />
           </div>
 
+          {/* Fake author/comment block */}
           <section className={styles.authorBox}>
             <Image
               src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80"
@@ -165,20 +191,21 @@ export default function NewsDetails({ news }: NewsDetailsProps) {
             <div>
               <p className={styles.authorLabel}>Author</p>
               <h3 className={styles.authorName}>{news.author}</h3>
+
               <p className={styles.authorText}>
-                {news.author} is a writer and editor covering culture,
-                politics, health, technology and public life for this demo news
-                portal.
+                {news.author} is a writer and editor covering culture, politics,
+                health, technology and public life for this demo news portal.
               </p>
             </div>
 
-            <button className={styles.followButton}>
+            <button type="button" className={styles.followButton}>
               <FaTwitter size={16} />
               Follow
             </button>
           </section>
         </article>
 
+        {/* Right sidebar */}
         <aside className={styles.sidebar}>
           <section className={styles.sidebarBlock}>
             <h2 className={styles.sidebarTitle}>Recommended for you</h2>
@@ -206,19 +233,18 @@ export default function NewsDetails({ news }: NewsDetailsProps) {
             ))}
           </section>
 
-          <section className={styles.sidebarBlock}>
-            <h2 className={styles.sidebarTitle}>Based on like</h2>
+          {basedOnLikeNews && (
+            <section className={styles.sidebarBlock}>
+              <h2 className={styles.sidebarTitle}>Based on like</h2>
 
-            {relatedNews.slice(0, 1).map((item) => (
               <Link
-                key={item.id}
-                href={`/news/${item.id}`}
+                href={`/news/${basedOnLikeNews.id}`}
                 className={styles.smallCard}
               >
                 <div className={styles.smallImageWrapper}>
                   <Image
-                    src={item.image}
-                    alt={item.title}
+                    src={basedOnLikeNews.image}
+                    alt={basedOnLikeNews.title}
                     fill
                     className={styles.image}
                     sizes="300px"
@@ -226,14 +252,15 @@ export default function NewsDetails({ news }: NewsDetailsProps) {
                 </div>
 
                 <div className={styles.smallContent}>
-                  <h3 className={styles.smallTitle}>{item.title}</h3>
+                  <h3 className={styles.smallTitle}>{basedOnLikeNews.title}</h3>
                 </div>
               </Link>
-            ))}
-          </section>
+            </section>
+          )}
         </aside>
       </section>
 
+      {/* Related topics */}
       <section className={styles.relatedSection}>
         <h2 className={styles.relatedTitle}>Related topics</h2>
 

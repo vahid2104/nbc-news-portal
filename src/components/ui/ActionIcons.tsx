@@ -1,8 +1,9 @@
 "use client";
 
-import { Heart, Share2 } from "lucide-react";
+import { Share2 } from "lucide-react";
 
 import BookmarkButton from "@/components/ui/BookmarkButton";
+import LikeButton from "@/components/ui/LikeButton";
 
 type ActionIconsProps = {
   newsId: number;
@@ -17,20 +18,13 @@ export default function ActionIcons({
   likes,
   shares,
   className = "",
-  iconSize = 14,
+  iconSize = 18,
 }: ActionIconsProps) {
   return (
     <div
       className={`flex items-center gap-5 text-xs text-gray-500 ${className}`}
     >
-      <button
-        type="button"
-        className="flex items-center gap-1 transition hover:text-red-600"
-        aria-label="Like news"
-      >
-        <Heart size={iconSize} />
-        <span>{likes}</span>
-      </button>
+      <LikeButton newsId={newsId} likes={likes} iconSize={iconSize} />
 
       <button
         type="button"
@@ -41,7 +35,7 @@ export default function ActionIcons({
         <span>{shares}</span>
       </button>
 
-      <BookmarkButton newsId={newsId} />
+      <BookmarkButton newsId={newsId} iconSize={iconSize} />
     </div>
   );
 }

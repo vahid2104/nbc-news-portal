@@ -6,14 +6,16 @@ import { useBookmark } from "@/hooks/useBookmark";
 
 type BookmarkButtonProps = {
   newsId: number;
-  size?: number;
   className?: string;
+  iconSize?: number;
+  showLabel?: boolean;
 };
 
 export default function BookmarkButton({
   newsId,
-  size = 14,
   className = "",
+  iconSize = 14,
+  showLabel = false,
 }: BookmarkButtonProps) {
   const { isBookmarked, toggleBookmark } = useBookmark(newsId);
 
@@ -27,9 +29,13 @@ export default function BookmarkButton({
       aria-label={isBookmarked ? "Remove bookmark" : "Add bookmark"}
     >
       <Bookmark
-        size={size}
+        size={iconSize}
         className={isBookmarked ? "fill-red-600" : "fill-none"}
       />
+
+      {showLabel && (
+        <span>{isBookmarked ? "Saved" : "Save"}</span>
+      )}
     </button>
   );
 }

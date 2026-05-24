@@ -2,13 +2,13 @@
 
 import { useLocalStorageToggle } from "./useLocalStorageToggle";
 
-const STORAGE_KEY = "bookmarked-news";
+const STORAGE_KEY = "liked-news";
 
-export function useBookmark(newsId: number) {
+export function useLike(newsId: number) {
   const { isSelected, toggle } = useLocalStorageToggle(STORAGE_KEY, newsId);
 
   return {
-    isBookmarked: isSelected,
-    toggleBookmark: toggle,
+    isLiked: isSelected,
+    toggleLike: toggle,
   };
 }

@@ -1,13 +1,34 @@
 export const heroStyles = {
-    mainContainer: "flex md:flex-row flex-col items-center justify-between gap-10",
-    image: "rounded-lg object-cover md:w-1/2 w-full h-80",
-    content: "flex flex-col md:w-1/2 w-full md:ml-8",
-    trending: "text-xl text-red-700 font-semibold",
-    iconContainer: "flex ml-auto",
-    iconButton: "text-sm text-gray-500 ml-4",
-    icon: "w-5 h-5 text-gray-500 ml-2 cursor-pointer",
-    title: "text-4xl font-bold text-gray-800",
-    description: "text-gray-600 mt-2 text-xl",
-    metaInfo: "text-gray-500 mt-4",
-    metaHighlight: "font-semibold mr-5"
+  mainContainer:
+    "mx-auto flex max-w-7xl flex-col items-center justify-between gap-10 px-4 py-10 md:flex-row",
+
+  imageWrapper:
+    "relative block h-80 w-full overflow-hidden bg-gray-200 md:w-1/2",
+
+  image:
+    "object-cover",
+
+  content:
+    "flex w-full flex-col md:ml-8 md:w-1/2",
+  
+  contentTop:
+    "flex items-center justify-between",
+
+  trending:
+    "mb-3 text-md font-semibold text-red-700",
+
+  iconContainer:
+    "mb-3 flex justify-end",
+
+  title:
+    "text-3xl font-bold leading-tight text-gray-900 transition hover:text-red-600 md:text-4xl",
+
+  description:
+    "mt-4 text-base leading-7 text-gray-600 md:text-lg",
+
+  metaInfo:
+    "mt-5 flex flex-wrap gap-3 text-sm text-gray-500",
+
+  metaHighlight:
+    "font-semibold",
 };
