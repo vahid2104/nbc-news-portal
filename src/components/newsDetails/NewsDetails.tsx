@@ -163,7 +163,7 @@ export default function NewsDetails({ news }: NewsDetailsProps) {
 
           {/* Tags */}
           <div className={styles.tags}>
-            <span className={styles.tag}>NBCBLK</span>
+            <span className={styles.tag}>WATCH</span>
             <span className={styles.tag}>Trending</span>
             <span className={styles.tag}>{news.category}</span>
             <span className={styles.tag}>Freebie</span>
