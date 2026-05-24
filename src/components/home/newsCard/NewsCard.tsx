@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import type { NewsItem } from "@/lib/mockData";
 import ActionIcons from "@/components/ui/ActionIcons";
@@ -20,10 +21,9 @@ export default function NewsCard({ news, viewMode }: NewsCardProps) {
         isList ? styles.articleList : styles.articleGrid
       }`}
     >
-      <div
-        className={
-          isList ? styles.imageWrapperList : styles.imageWrapperGrid
-        }
+      <Link
+        href={`/news/${news.id}`}
+        className={isList ? styles.imageWrapperList : styles.imageWrapperGrid}
       >
         <Image
           src={news.image}
@@ -38,10 +38,12 @@ export default function NewsCard({ news, viewMode }: NewsCardProps) {
         />
 
         <span className={styles.categoryBadge}>{news.category}</span>
-      </div>
+      </Link>
 
       <div className={isList ? styles.contentList : styles.contentGrid}>
-        <h3 className={styles.title}>{news.title}</h3>
+        <Link href={`/news/${news.id}`}>
+          <h3 className={styles.title}>{news.title}</h3>
+        </Link>
 
         <p className={styles.description}>{news.description}</p>
 

@@ -1,5 +1,5 @@
 export const footerStyles = {
-  container: "bg-[#0E1E32] text-white py-8 mt-8 md:h-auto h-[500px]",
+  container: "bg-[#0E1E32] text-white py-8 md:h-auto h-[500px]",
   innerContainer: "container flex h-full md:flex-row flex-col items-center justify-between max-w-7xl mx-auto px-4 text-center",
   logoSection: "flex flex-col items-center gap-4",
   logo: "w-15 h-auto",

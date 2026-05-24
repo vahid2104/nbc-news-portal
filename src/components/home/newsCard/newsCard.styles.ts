@@ -7,10 +7,10 @@ export const newsCardStyles = {
   articleList:
     "flex flex-col gap-4 overflow-hidden p-4 sm:flex-row",
 
-  imageWrapperGrid: "relative h-48 w-full",
+  imageWrapperGrid: "relative block h-48 w-full overflow-hidden",
 
   imageWrapperList:
-    "relative h-48 w-full shrink-0 sm:h-32 sm:w-48",
+    "relative block h-48 w-full shrink-0 overflow-hidden sm:h-32 sm:w-48",
 
   image: "object-cover",
 
@@ -30,9 +30,7 @@ export const newsCardStyles = {
   meta:
     "mb-5 flex flex-wrap items-center gap-3 text-xs text-gray-500",
 
-  actions:
-    "mt-auto border-t border-gray-100 pt-4",
+  actions: "mt-auto border-t border-gray-100 pt-4",
 
-  actionIcons:
-    "justify-start",
+  actionIcons: "justify-start",
 };

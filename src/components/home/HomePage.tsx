@@ -1,5 +1,3 @@
-import Navbar from "@/components/layout/navbar";
-import Footer from "@/components/layout/footer";
 import HeroSection from "@/components/home/hero";
 import BreakingNews from "./BreakingNews";
 import LatestStories from "@/components/home/latestStories";
@@ -9,7 +7,6 @@ import EditorsPicks from "@/components/home/editorsPicks";
 export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
-      <Navbar />
 
       <main className="container max-w-7xl mx-auto px-4 py-8">
         <HeroSection />
@@ -23,7 +20,6 @@ export default function HomePage() {
         <EditorsPicks />
       </main>
 
-      <Footer />
     </div>
   );
 }

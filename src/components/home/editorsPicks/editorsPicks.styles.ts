@@ -13,7 +13,7 @@ export const editorsPicksStyles = {
   card:
     "min-w-[260px] max-w-[260px] overflow-hidden bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md",
 
-  imageWrapper: "relative h-32 w-full",
+  imageWrapper: "relative block h-32 w-full overflow-hidden",
 
   image: "object-cover",
 
@@ -23,10 +23,10 @@ export const editorsPicksStyles = {
   content:
     "flex min-h-[150px] flex-col justify-between border border-gray-200 p-4",
 
-  cardTitle: "mb-4 text-sm font-bold leading-snug text-gray-900",
+  cardTitle:
+    "mb-4 text-sm font-bold leading-snug text-gray-900 transition hover:text-red-600",
 
-  actions:
-    "border-t border-gray-100 pt-3",
+  actions: "border-t border-gray-100 pt-3",
 
   dotsWrapper: "mt-3 flex justify-center gap-2",
 
