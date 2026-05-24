@@ -9,7 +9,7 @@ export default function NewsDetailsLoading() {
       </section>
 
       <div className="mx-auto -mt-20 max-w-6xl px-4">
-        <div className="h-[260px] w-full animate-pulse bg-gray-300 md:h-[430px]" />
+        <div className="h-65 w-full animate-pulse bg-gray-300 md:h-107.5" />
       </div>
 
       <section className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-10 lg:grid-cols-[90px_minmax(0,1fr)_300px]">
