@@ -1,11 +1,46 @@
+"use client";
 
-const BreakingNews = () => {
+import { useNews } from "@/hooks/useNews";
+
+export default function BreakingNews() {
+  const { articles, loading, error } = useNews({
+    category: "general",
+    pageSize: 5,
+  });
+
+  if (loading) {
+    return (
+      <section className="mx-auto max-w-7xl px-4">
+        <div className="h-14 animate-pulse bg-red-200" />
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="mx-auto max-w-7xl px-4">
+        <div className="bg-red-50 px-4 py-3 text-sm text-red-600">
+          Breaking news failed to load: {error}
+        </div>
+      </section>
+    );
+  }
+
+  const tickerText = articles.map((article) => article.title).join(" • ");
+
   return (
-    <div className="bg-red-800 text-white py-6 px-4 flex md:flex-row flex-col text-center items-center justify-center gap-8 my-10 text-xl">
-      <span className="bg-white text-red-800 py-3 px-3 mr-2">Breaking News</span> 
-      Kanye West says he&apos;s running for president in 2020.
-    </div>
-  )
-}
+    <section className="mx-auto max-w-7xl  my-6">
+      <div className="flex overflow-hidden px-4 py-6  bg-red-700 text-white">
+        <div className="shrink-0 bg-white px-6 py-4 text-xs font-bold uppercase tracking-wide text-red-700">
+          Breaking News
+        </div>
 
-export default BreakingNews;
+        <div className="relative flex flex-1 items-center overflow-hidden">
+          <p className="animate-[ticker_25s_linear_infinite] whitespace-nowrap px-6 text-sm font-medium">
+            {tickerText}
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}

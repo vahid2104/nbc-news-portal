@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Menu, Search, User } from "lucide-react";
 
-import { categories } from "@/lib/mockData";
+import { navCategories } from "@/lib/constants";
 import { navbarStyles as styles } from "./navbar.styles";
 
 export default function Navbar() {
@@ -18,7 +18,7 @@ export default function Navbar() {
         />
 
         <ul className={styles.navList}>
-          {categories.map((item) => (
+          {navCategories.map((item) => (
             <li key={item} className={styles.navItem}>
               {item}
             </li>

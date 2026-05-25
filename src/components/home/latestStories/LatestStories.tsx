@@ -3,48 +3,50 @@
 import { useState } from "react";
 import { Grid2X2, List } from "lucide-react";
 
-import { latestStories } from "@/lib/mockData";
-import type { NewsItem } from "@/lib/mockData";
-import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
-import NewsCard from "../newsCard";
+import { useNews } from "@/hooks/useNews";
+import type { NewsCategory } from "@/types/news";
+import { newsTabs } from "@/lib/constants";
+import ArticleCard from "../articleCard/ArticleCard";
 import { latestStoriesStyles as styles } from "./latestStories.styles";
 
-type TabType = "Latest Stories" | "Think" | "Health";
+type TabType = (typeof newsTabs)[number]["label"];
 type ViewMode = "grid" | "list";
-
-const tabs: TabType[] = ["Latest Stories", "Think", "Health"];
 
 export default function LatestStories() {
   const [activeTab, setActiveTab] = useState<TabType>("Latest Stories");
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
 
-  const filteredStories: NewsItem[] =
-    activeTab === "Latest Stories"
-      ? latestStories
-      : latestStories.filter((item) => item.category === activeTab);
+  const activeCategory = newsTabs.find((tab) => tab.label === activeTab)
+    ?.value as NewsCategory;
 
-  const { visibleItems, hasMore, loadMore } = useInfiniteScroll<NewsItem>(
-    filteredStories,
-    4,
-    4
-  );
+  const {
+    articles,
+    loading,
+    loadingMore,
+    error,
+    hasMore,
+    loadMore,
+  } = useNews({
+    category: activeCategory,
+    pageSize: 4,
+  });
 
   return (
     <section className={styles.section}>
       <div className={styles.header}>
         <div className={styles.tabsWrapper}>
-          {tabs.map((tab) => (
+          {newsTabs.map((tab) => (
             <button
-              key={tab}
+              key={tab.label}
               type="button"
-              onClick={() => setActiveTab(tab)}
+              onClick={() => setActiveTab(tab.label)}
               className={`${styles.tabButtonBase} ${
-                activeTab === tab
+                activeTab === tab.label
                   ? styles.tabButtonActive
                   : styles.tabButtonInactive
               }`}
             >
-              {tab}
+              {tab.label}
             </button>
           ))}
         </div>
@@ -78,30 +80,54 @@ export default function LatestStories() {
         </div>
       </div>
 
-      {visibleItems.length > 0 ? (
+      {loading && (
+        <div className={styles.gridWrapper}>
+          {Array.from({ length: 4 }).map((_, index) => (
+            <div
+              key={index}
+              className="h-107.5 animate-pulse bg-white shadow-sm"
+            />
+          ))}
+        </div>
+      )}
+
+      {error && !loading && (
+        <p className="bg-red-50 p-4 text-sm text-red-600">
+          Failed to load latest stories: {error}
+        </p>
+      )}
+
+      {!loading && !error && articles.length > 0 && (
         <div
           className={
             viewMode === "grid" ? styles.gridWrapper : styles.listWrapper
           }
         >
-          {visibleItems.map((item) => (
-            <NewsCard key={item.id} news={item} viewMode={viewMode} />
+          {articles.map((article) => (
+            <ArticleCard
+              key={article.url}
+              article={article}
+              viewMode={viewMode}
+            />
           ))}
         </div>
-      ) : (
+      )}
+
+      {!loading && !error && articles.length === 0 && (
         <p className={styles.emptyText}>
           No stories found for this category.
         </p>
       )}
 
-      {hasMore && (
+      {!loading && !error && hasMore && (
         <div className={styles.viewMoreWrapper}>
           <button
             type="button"
             onClick={loadMore}
+            disabled={loadingMore}
             className={styles.viewMoreButton}
           >
-            View More
+            {loadingMore ? "Loading..." : "View More"}
           </button>
         </div>
       )}

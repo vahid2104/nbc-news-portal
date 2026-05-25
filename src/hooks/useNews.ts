@@ -15,23 +15,12 @@ type UseNewsParams = {
   pageSize?: number;
 };
 
-type NewsRequestResult =
-  | {
-      data: NewsApiResponse;
-      error: null;
-    }
-  | {
-      data: null;
-      error: string;
-    };
-
 function cleanNewsArticles(articles: NewsApiArticle[]) {
   return articles.filter(
     (article) =>
       article.title &&
       article.title !== "[Removed]" &&
-      article.url &&
-      article.urlToImage
+      article.url
   );
 }
 
@@ -57,7 +46,7 @@ export function useNews({
   );
 
   const requestNews = useCallback(
-    async (pageNumber: number): Promise<NewsRequestResult> => {
+    async (pageNumber: number) => {
       try {
         const response = await axios.get<NewsApiResponse>("/api/news", {
           params: {
@@ -69,15 +58,17 @@ export function useNews({
         });
 
         return {
-          data: response.data,
-          error: null,
+          articles: response.data.articles,
+          totalResults: response.data.totalResults,
+          errorMessage: "",
         };
       } catch (error) {
         const axiosError = error as AxiosError<{ message?: string }>;
 
         return {
-          data: null,
-          error:
+          articles: [],
+          totalResults: 0,
+          errorMessage:
             axiosError.response?.data?.message ||
             axiosError.message ||
             "Failed to fetch news",
@@ -91,23 +82,25 @@ export function useNews({
     let isCancelled = false;
 
     async function loadInitialNews() {
+      setLoading(true);
+
       const result = await requestNews(1);
 
       if (isCancelled) return;
 
-      if (result.error) {
+      if (result.errorMessage) {
         setArticles([]);
         setTotalResults(0);
-        setError(result.error);
+        setError(result.errorMessage);
         setPage(1);
         setLoading(false);
         return;
       }
 
-      const cleanArticles = cleanNewsArticles(result.data.articles);
+      const cleanArticles = cleanNewsArticles(result.articles);
 
       setArticles(cleanArticles);
-      setTotalResults(result.data.totalResults);
+      setTotalResults(result.totalResults);
       setError("");
       setPage(1);
       setLoading(false);
@@ -131,16 +124,16 @@ export function useNews({
 
     const result = await requestNews(nextPage);
 
-    if (result.error) {
-      setError(result.error);
+    if (result.errorMessage) {
+      setError(result.errorMessage);
       setLoadingMore(false);
       return;
     }
 
-    const cleanArticles = cleanNewsArticles(result.data.articles);
+    const cleanArticles = cleanNewsArticles(result.articles);
 
     setArticles((prevArticles) => [...prevArticles, ...cleanArticles]);
-    setTotalResults(result.data.totalResults);
+    setTotalResults(result.totalResults);
     setPage(nextPage);
     setError("");
     setLoadingMore(false);
