@@ -9,7 +9,7 @@ This project was developed as a demo-ready client presentation task for a news p
 
 ## 🚀 Live Demo
 
-🔗 **Live Demo:** _Add your Vercel URL here_
+🔗 **Live Demo:** [nbc-news-portal.vercel.app](https://nbc-news-portal.vercel.app/)
 
 
 

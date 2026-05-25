@@ -1,1 +1,1 @@
-export {default} from "./NewsDetails"
+export {default} from "./ApiNewsDetails"
