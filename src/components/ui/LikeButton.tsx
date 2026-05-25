@@ -5,7 +5,7 @@ import { Heart } from "lucide-react";
 import { useLike } from "@/hooks/useLike";
 
 type LikeButtonProps = {
-  newsId: number;
+  newsId: string | number;
   likes: number;
   className?: string;
   iconSize?: number;
@@ -16,7 +16,7 @@ export default function LikeButton({
   newsId,
   likes,
   className = "",
-  iconSize = 18,
+  iconSize = 14,
   showCount = true,
 }: LikeButtonProps) {
   const { isLiked, toggleLike } = useLike(newsId);

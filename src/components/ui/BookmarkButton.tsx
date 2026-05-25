@@ -5,7 +5,7 @@ import { Bookmark } from "lucide-react";
 import { useBookmark } from "@/hooks/useBookmark";
 
 type BookmarkButtonProps = {
-  newsId: number;
+  newsId: string | number;
   className?: string;
   iconSize?: number;
   showLabel?: boolean;
@@ -33,9 +33,7 @@ export default function BookmarkButton({
         className={isBookmarked ? "fill-red-600" : "fill-none"}
       />
 
-      {showLabel && (
-        <span>{isBookmarked ? "Saved" : "Save"}</span>
-      )}
+      {showLabel && <span>{isBookmarked ? "Saved" : "Save"}</span>}
     </button>
   );
 }

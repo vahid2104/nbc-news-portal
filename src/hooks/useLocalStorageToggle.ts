@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 
-function readStorage(storageKey: string): number[] {
+type StorageId = string | number;
+
+function readStorage(storageKey: string): StorageId[] {
   if (typeof window === "undefined") return [];
 
   try {
@@ -15,18 +17,21 @@ function readStorage(storageKey: string): number[] {
   }
 }
 
-export function useLocalStorageToggle(storageKey: string, newsId: number) {
-  const [selectedIds, setSelectedIds] = useState<number[]>(() =>
+export function useLocalStorageToggle(
+  storageKey: string,
+  itemId: StorageId
+) {
+  const [selectedIds, setSelectedIds] = useState<StorageId[]>(() =>
     readStorage(storageKey)
   );
 
-  const isSelected = selectedIds.includes(newsId);
+  const isSelected = selectedIds.includes(itemId);
 
   const toggle = () => {
     setSelectedIds((prevIds) => {
-      const updatedIds = prevIds.includes(newsId)
-        ? prevIds.filter((id) => id !== newsId)
-        : [...prevIds, newsId];
+      const updatedIds = prevIds.includes(itemId)
+        ? prevIds.filter((id) => id !== itemId)
+        : [...prevIds, itemId];
 
       localStorage.setItem(storageKey, JSON.stringify(updatedIds));
 

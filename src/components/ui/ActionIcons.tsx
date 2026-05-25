@@ -6,7 +6,7 @@ import BookmarkButton from "@/components/ui/BookmarkButton";
 import LikeButton from "@/components/ui/LikeButton";
 
 type ActionIconsProps = {
-  newsId: number;
+  newsId: string | number;
   likes: number;
   shares: number;
   className?: string;
@@ -18,7 +18,7 @@ export default function ActionIcons({
   likes,
   shares,
   className = "",
-  iconSize = 18,
+  iconSize = 14,
 }: ActionIconsProps) {
   return (
     <div
